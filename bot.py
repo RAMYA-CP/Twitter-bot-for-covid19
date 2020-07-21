@@ -3,7 +3,8 @@ import pandas as pd
 import requests
 import tweepy
 import time
-import credentials
+import os
+from os import environ
 def get_content():
     url = "https://corona-api.com/timeline"
     headers = {
@@ -15,12 +16,12 @@ def get_content():
     count=data[0].replace("},","")
     url = "https://api.smartable.ai/coronavirus/news/global"
     headers = {
-        "subscription-key":credentials.smartable_aikey,
+        "subscription-key":environ['smartable_aikey'],
         "location":"global"
     }
     response = requests.request("GET", url,headers=headers)
     df1=json.loads(response.text)
-    url = "http://newsapi.org/v2/everything?from=2020-07-19&q=covid-19 vaccines&sortBy=popularity&apiKey="+credentials.news_apikey
+    url = "http://newsapi.org/v2/everything?from=2020-07-19&q=covid-19 vaccines&sortBy=popularity&apiKey="+environ['news_apikey']
     response = requests.request("GET", url)
     df=json.loads(response.text)
     top_news=[]
@@ -31,9 +32,9 @@ def get_content():
     return count,top_news
 def authent_tweet(count,top_news):
     # Authenticate to Twitter
-    auth = tweepy.OAuthHandler(credentials.twitter_consumerkey, 
-        credentials.twitter_consumertoken)
-    auth.set_access_token(credentials.twitter_apikey,credentials.twitter_apitoken)
+    auth = tweepy.OAuthHandler(environ['twitter_consumerkey'], 
+        environ['twitter_consumertoken'])
+    auth.set_access_token(environ['twitter_apikey'],environ['twitter_apitoken'])
 
     api = tweepy.API(auth, wait_on_rate_limit=True,
         wait_on_rate_limit_notify=True)

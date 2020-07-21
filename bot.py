@@ -49,8 +49,20 @@ def authent_tweet(count,top_news):
     for i in top_news:
         news=''
         news='\n'.join(k for k in i)
-        api.update_status(news)
-    api.update_status(count)
+       try:
+            api.update_status(news)
+        except tweepy.TweepError as error:
+            if error.api_code == 187:
+                print('duplicate message')
+            else:
+               raise error
+    try:
+        api.update_status(count)
+    except tweepy.TweepError as error:
+        if error.api_code == 187:
+            print('duplicate message')
+        else:
+            raise error
     return 1
 def main():
     interval=60*60*12

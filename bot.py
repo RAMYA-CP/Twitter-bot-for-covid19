@@ -49,7 +49,7 @@ def authent_tweet(count,top_news):
     for i in top_news:
         news=''
         news='\n'.join(k for k in i)
-       try:
+        try:
             api.update_status(news)
         except tweepy.TweepError as error:
             if error.api_code == 187:

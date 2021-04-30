@@ -34,7 +34,7 @@ tqdm==4.38.0
 tweepy==3.9.0
 typed-ast==1.4.1
 Unidecode==1.1.1
-urllib3==1.25.7
+urllib3==1.25.8
 virtualenv==16.7.9
 virtualenv-clone==0.5.3
 wasabi==0.7.0

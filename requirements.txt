@@ -1,5 +1,5 @@
 cachetools==4.1.1
-certifi==2019.9.11
+certifi==2022.12.7
 docutils==0.15.2
 importlib-metadata==0.23
 lxml==4.4.1
